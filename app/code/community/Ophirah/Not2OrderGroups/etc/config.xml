@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ophirah_Not2OrderGroups>
+            <version>1.1.0</version>
+        </Ophirah_Not2OrderGroups>
+    </modules>
+    <global>
+        <blocks>
+            <n2ogroups>
+                <class>Ophirah_Not2OrderGroups_Block</class>
+            </n2ogroups>
+        </blocks>
+        <models>
+            <n2ogroups>
+                <class>Ophirah_Not2OrderGroups_Model</class>
+                <resourceModel>n2ogroups_mysql4</resourceModel>
+            </n2ogroups>
+            <n2ogroups_mysql4>
+                <class>Ophirah_Not2OrderGroups_Model_Mysql4</class>
+                <entities>
+                    <product_attribute_group_allow_order>
+                        <table>not2order_group_allow_order</table>
+                    </product_attribute_group_allow_order>
+                    <product_attribute_group_hide_price>
+                        <table>not2order_group_hide_price</table>
+                    </product_attribute_group_hide_price>
+                </entities>
+            </n2ogroups_mysql4>
+        </models>
+
+        <helpers>
+            <n2ogroups>
+                <class>Ophirah_Not2OrderGroups_Helper</class>
+            </n2ogroups>
+        </helpers>
+
+        <resources>
+            <n2ogroups_setup>
+                <setup>
+                    <module>Ophirah_Not2OrderGroups</module>
+                    <class>Ophirah_Not2OrderGroups_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </n2ogroups_setup>
+            <n2ogroups_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </n2ogroups_write>
+            <n2ogroups_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </n2ogroups_read>
+        </resources>
+        <events>
+            <adminhtml_catalog_product_edit_prepare_form>
+                <observers>
+                    <n2ogroups_add_group_forms>
+                        <type>singleton</type>
+                        <class>n2ogroups/observer</class>
+                        <method>addAdminGroupForms</method>
+                    </n2ogroups_add_group_forms>
+                </observers>
+            </adminhtml_catalog_product_edit_prepare_form>
+            <catalog_product_load_after>
+                <observers>
+                    <n2ogroups_set_group_hideprice>
+                        <type>singleton</type>
+                        <class>n2ogroups/observer</class>
+                        <method>setHidePrice</method>
+                    </n2ogroups_set_group_hideprice>
+                </observers>
+
+                <observers>
+                    <ophirah_n2ogroups_setsalestate>
+                        <type>singleton</type>
+                        <class>n2ogroups/observer</class>
+                        <method>setAllowedToOrdermode</method>
+                    </ophirah_n2ogroups_setsalestate>
+                </observers>
+
+            </catalog_product_load_after>
+
+        </events>
+    </global>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Ophirah_Not2OrderGroups>
+                    <files>
+                        <default>Ophirah_Not2OrderGroups.csv</default>
+                    </files>
+                </Ophirah_Not2OrderGroups>
+            </modules>
+        </translate>
+    </frontend>
+
+    <default>
+        <n2ogroups>
+            <general translate="default_description" module="not2ordergroups">
+                <enabled>1</enabled>
+            </general>
+        </n2ogroups>
+    </default>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ophirah_Not2OrderGroups>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Ophirah_Not2Order />
+            </depends>
+        </Ophirah_Not2OrderGroups>
+    </modules>   
+</config>

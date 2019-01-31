@@ -1,0 +1,110 @@
+<?php $_htmlId      = $this->getElement()->getHtmlId() ?>
+<?php $_htmlClass   = $this->getElement()->getClass() ?>
+<?php $_htmlName    = $this->getElement()->getName() ?>
+<?php $_readonly    = $this->getElement()->getReadonly() ?>
+<?php $_showWebsite = $this->isShowWebsiteColumn(); ?>
+<?php $_editWebsite = $this->isAllowChangeWebsite(); ?>
+<?php $_groupActionName   = $this->getGroupName(); ?>
+<?php $_priceValueValidation = $this->getPriceValidation('validate-greater-than-zero'); ?>
+
+
+<?php $_showWebsite = $this->isShowWebsiteColumn(); ?>
+<?php $_showWebsite= $this->isMultiWebsites(); ?>
+<tr>
+    <td class="label"><?php echo $this->getElement()->getLabel() ?></td>
+    <td colspan="10" class="grid tier">
+    <table cellspacing="0" class="data border" id="tiers_table">
+        <col width="300" />
+        <col />
+        <col width="95"  />
+        <thead>
+            <tr class="headings">
+            
+                <th><?php echo Mage::helper('catalog')->__('Customer Group') ?></th>
+                <th></th>
+                <th class="last"><?php echo Mage::helper('catalog')->__('Action') ?></th>
+            </tr>
+        </thead>
+        <tbody id="<?php echo $_htmlId ?>_container"></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="a-right"><?php echo $this->getAddButtonHtml() ?></td>
+            </tr>
+        </tfoot>
+    </table>
+
+<script type="text/javascript">
+//<![CDATA[
+var <?php echo $_groupActionName;?>GroupRowTemplate = '<tr>'
+  
+    + '<td><select class="<?php echo $_htmlClass ?> custgroup required-entry" name="<?php echo $_htmlName ?>[{{index}}][cust_group]" id="<?php echo $_groupActionName;?>_row_{{index}}_cust_group">'
+    <?php foreach ($this->getCustomerGroups() as $_groupId=>$_groupName): ?>
+    + '<option value="<?php echo $_groupId ?>"><?php echo $this->jsQuoteEscape($this->htmlEscape($_groupName)) ?></option>'
+    <?php endforeach ?>
+    + '</select></td>'
+    + '<td><select class="<?php echo $_htmlClass ?> required-entry" type="text" name="<?php echo $_htmlName ?>[{{index}}][value]" value="{{value}}" id="<?php echo $_groupActionName;?>_row_{{index}}_value" />'
+    + '<option value="0"><?php echo Mage::helper('n2ogroups')->__('No'); ?></option>'
+    + '<option value="1"><?php echo Mage::helper('n2ogroups')->__('Yes'); ?></option>'
+    + '</select>'
+    + '<input type="hidden" name="website_id" value="0" /></td>'
+    + '<td class="last"><input type="hidden" name="<?php echo $_htmlName ?>[{{index}}][delete]" class="delete" value="" id="<?php echo $_groupActionName;?>_row_{{index}}_delete" />'
+    + '<button title="<?php echo Mage::helper('n2ogroups')->__("Delete Group") ?>" type="button" class="scalable delete icon-btn delete-product-option" id="<?php echo $_groupActionName;?>_row_{{index}}_delete_button" onclick="return <?php echo $_groupActionName;?>GroupControl.deleteItem(event);">'
+    + '<span><span><span><?php echo Mage::helper('catalog')->__("Delete") ?></span></span></span></button></td>'
+    + '</tr>';
+
+var <?php echo $_groupActionName;?>GroupControl = {
+    template: new Template(<?php echo $_groupActionName;?>GroupRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+    itemsCount: 0,
+    addItem : function () {
+        <?php if ($_readonly): ?>
+        if (arguments.length < 4) {
+            return;
+        }
+        <?php endif; ?>
+        var data = {
+            group: '<?php echo $this->getDefaultCustomerGroup() ?>',
+            value:0,
+            readOnly: false,
+            index: this.itemsCount++
+        };
+
+        if(arguments.length >= 2) {
+          data.group      = arguments[0];
+          data.value        = arguments[1];
+           
+        }
+ 
+        Element.insert($('<?php echo $_htmlId ?>_container'), {
+            bottom : this.template.evaluate(data)
+        });
+
+        $('<?php echo $_groupActionName;?>_row_' + data.index + '_cust_group').value = data.group;
+        $('<?php echo $_groupActionName;?>_row_' + data.index + '_value').value = data.value;
+   
+        $('<?php echo $_htmlId ?>_container').select('input', 'select').each(function(el){ Event.observe(el, 'change', el.setHasChanges.bind(el)); });
+    },
+    disableElement: function(el) {
+        el.disabled = true;
+        el.addClassName('disabled');
+    },
+    deleteItem: function(event) {
+        var tr = Event.findElement(event, 'tr');
+        if (tr) {
+            Element.select(tr, '.delete').each(function(elem){elem.value='1'});
+            Element.select(tr, ['input', 'select']).each(function(elem){elem.hide()});
+            Element.hide(tr);
+            Element.addClassName(tr, 'no-display template');
+        }
+        return false;
+    }
+};
+<?php foreach ($this->getValues() as $_item): ?>
+<?php echo $_groupActionName;?>GroupControl.addItem('<?php echo $_item['cust_group'] ?>', '<?php echo (int) $_item['value'] ?>', <?php echo (int)!empty($_item['readonly'])?>);
+<?php endforeach; ?>
+<?php if ($_readonly): ?>
+$('<?php echo $_htmlId ?>_container').up('table').select('button')
+    .each(<?php echo $_groupActionName;?>GroupControl.disableElement);
+<?php endif; ?>
+//]]>
+</script>
+</td></tr>
