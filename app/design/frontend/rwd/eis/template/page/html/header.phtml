@@ -1,0 +1,159 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<?php /*?><div class="header-language-background">
+    <div class="header-language-container">
+        <div class="store-language-container">
+            <?php echo $this->getChildHtml('store_language') ?>
+        </div>
+
+        <?php echo $this->getChildHtml('currency_switcher') ?>
+
+        <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getChildHtml('accountLinks') ?></p>
+    </div>
+</div><?php */?>
+<div class="header-wrapper">
+<header id="header" class="page-header">
+    <div class="page-header-container">
+        <a class="logo" href="<?php echo $this->getUrl('') ?>">
+            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+            <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+        </a>
+
+        <?php // In order for the language switcher to display next to logo on smaller viewports, it will be moved here.
+              // See app.js for details ?>
+        <div class="store-language-container"></div>
+
+        <!-- Skip Links -->
+
+        <div class="skip-links">
+            <a href="#header-nav" class="skip-link skip-nav">
+                <span class="icon"></span>
+                <span class="label"><?php echo $this->__('Menu'); ?></span>
+            </a>
+
+            <a href="#header-search" class="skip-link skip-search">
+                <span class="icon"></span>
+                <span class="label"><?php echo $this->__('Search'); ?></span>
+            </a>
+
+            <div class="account-cart-wrapper">
+            <div class="top-call">
+            <div class="call">
+<ul>
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('top-block')->toHtml(); ?>
+            </ul>
+            </div>
+            </div>
+            <div class="top-menu-log">
+                <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
+                    <span class="icon"></span>
+                    <span class="label"><?php echo $this->__('Account'); ?></span>
+                </a>
+
+                <!-- Cart -->
+               <div class="login-link">
+               <?php $helper = Mage::helper('customer'); ?>
+                <?php if ($helper->isLoggedIn()) : ?>               
+               <a href="<?php echo Mage::getUrl('customer/account/logout'); ?>">Log Out</a>
+                <?php else :?>
+                <a href="<?php echo $helper->getLoginUrl(); ?>"><?php echo $this->__('Login');?></a> 
+<?php endif; ?>
+               </div>
+               </div>
+               <div class="cart-check">
+               <div class="header-compare">
+               <?php
+$_helper = $this->helper('catalog/product_compare');
+$_items = $_helper->getItemCount() > 0 ? $_helper->getItemCollection() : null;
+?>
+
+        
+            <?php if($_helper->getItemCount() > 0){ ?>
+                <small><?php echo $this->__('%d', $_helper->getItemCount()) ?></small>
+                <script type="text/javascript">decorateList('compare-items')</script>
+       
+             <a onclick="popWin('<?php echo $_helper->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')"><?php echo $this->__('Compare') ?></a>
+            <?php } else { ?><small>0</small><strong><span><?php echo $this->__('Compare') ?></span></strong><?php } ?>
+        
+               </div>
+                <!-- Cart2Qoute -->
+                <div class="header-miniquote">
+                    <?php echo $this->getChildHtml('miniquote_head'); ?>
+                     <!-- Cart2Qoute -->
+                    <div id="header-quote" class="block skip-content">
+                        <?php echo $this->getChildHtml("miniquote_content"); ?>
+                    </div>
+                </div>
+                <div class="header-minicart">
+                    <?php echo $this->getChildHtml('minicart_head'); ?>
+                    
+                </div>
+                </div>
+            </div>
+
+
+        </div>
+
+      
+
+        <div id="header-search" class="skip-content">
+            <?php echo $this->getChildHtml('topSearch') ?>
+        </div>
+
+        <!-- Account -->
+
+        <div id="header-account" class="skip-content">
+            <?php echo $this->getChildHtml('topLinks') ?>
+        </div>
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header-ship-banner')->toHtml(); ?>
+       
+    </div>
+     
+</header>
+</div>
+  <!-- Navigation -->
+<div class="navigation-menu">
+<div class="container">
+        <div id="header-nav" class="skip-content">
+            <?php echo $this->getChildHtml('topMenu') ?>
+        </div>
+        </div>
+</div>
+        <!-- Search -->
+<?php echo $this->getChildHtml('topContainer'); ?>
+<?php if($this->getIsHomePage()) { ?>
+<div class="banner-section">
+  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('slider')->toHtml(); ?>
+  </div>
+  <div class="top-banner">
+   <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header-promobanner ')->toHtml(); ?>
+  </div>
+<?php } ?>

@@ -21,17 +21,17 @@
  *
  * @category    Mage
  * @package     Mage_Core
- * @copyright   Copyright (c) 2006-2018 Magento, Inc. (http://www.magento.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 -->
 <config>
     <global>
         <install>
-            <date><![CDATA[Sat, 26 Jan 2019 17:07:11 +0000]]></date>
+            <date><![CDATA[Mon, 29 Feb 2016 06:10:45 +0000]]></date>
         </install>
         <crypt>
-            <key><![CDATA[d9bfcd3ccd5e28712de487842bba7f92]]></key>
+            <key><![CDATA[476a9eaad115eaca62c99d039544401d]]></key>
         </crypt>
         <disable_local_modules>false</disable_local_modules>
         <resources>
