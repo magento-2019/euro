@@ -1,0 +1,104 @@
+NWDthemes.com - Wunderadmin
+
+
+
+24 July 2015
+-----------------
+version 1.1.1
+
+* updated: Update to ERP module compatibility.
+
+* fixed: Fix for checkbox in add credit memo.
+
+
+
+09 June 2015
+-----------------
+version 1.1.0
+
+* added: support for: Mirasvit Advanced Reports, Mirasvit Follow-up Email, BoostMyShop Product Return (RMA), Amasty Extended Product Grid
+* added: M2EPro compatibility
+* added: BoostMyShop CRM support
+* added: Extended Product Grid with Editor module support
+* added: IWD module support
+* added: other third party extensions support
+
+* fixed: massaction button alignment in Clean and Modern themes
+
+
+
+15 April 2015
+-----------------
+version 1.0.6
+
+
+* added: Added toggable navigation in Modern theme.
+* fixed: IWD module support bug fix.
+
+
+
+6 March 2015
+-----------------
+version 1.0.5
+
+* fixed: Fix for default values disabled trigger bug.
+* added: Added support for M2EPro module.
+* added: ERP module support added.
+* fixed: Fix for not clickable checkboxes.
+* fixed: Fix for duplicating calendar icons.
+* fixed: Fix for expandable link in Modern theme navigation.
+* fixed: Fix for checkboxes alignment issue.
+* fixed: Fix for Chrome checkbox issues in Edit Role.
+* fixed: Fix for some fields alignment.
+
+
+
+16 January 2015
+-----------------
+version 1.0.4
+
+* fixed: Themes revised for removing design issues.
+
+
+
+12 January 2015
+-----------------
+version 1.0.3
+
+* fixed: Fix for gallery popover issue in Modren theme.
+
+
+
+5 January 2015
+-----------------
+version 1.0.2
+
+* fixed: Added missing newsletter and report icons.
+* added: Custom CSS feature.
+* fixed: Fix to hide empty menu entry in White Label mode.
+* fixed: Added missing order related icons.
+* fixed: Fix for dashboard tabs glitch.
+
+
+
+5 December 2014
+-----------------
+version 1.0.1
+
+* fixed: Fix align issue on massactions in Modern theme.
+* fixed: Adjust footer position in Modern theme.
+* fixed: Fix for big logo problem. 
+* fixed: Fix for import incorrect format redirect. 
+* fixed: Checkboxes in tree fix.
+* fixed: Export button aligment issue. 
+* fixed: Fix for tables and forms alignment. 
+* fixed: Fix for permissions role issue. 
+* fixed: Fix for message on login screen in Modern theme. 
+
+
+
+1 December 2014
+-----------------
+version 1.0.0
+
+Initial Release
