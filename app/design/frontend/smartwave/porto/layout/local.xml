@@ -105,6 +105,13 @@
                 <block type="checkout/cart_totals" name="checkout.cart.totals" as="totals" template="checkout/cart/totals.phtml"/>
             </block>
             <action method="unsetChild" ifconfig="porto_settings/header/type" condition="9"><name>mobile.nav</name></action>
+             <block type="qquoteadv/checkout_miniquote_miniquote" name="miniquote_head" template="qquoteadv/checkout/quote/miniquotehead.phtml" before="minicart_head" />
+            <block type="qquoteadv/checkout_miniquote_miniquote" name="miniquote_content" template="qquoteadv/checkout/quote/miniquote/miniquoteitems.phtml"  after="minicart_head">
+                <action method="addItemRender"><type>default</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+                <action method="addItemRender"><type>simple</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>qquoteadv/checkout_miniquote_item_miniquoterenderer</block><template>qquoteadv/checkout/quote/miniquoteitem.phtml</template></action>
+            </block>
         </reference>
         <reference name="top.links">
             <remove name="checkout_cart_link"/>

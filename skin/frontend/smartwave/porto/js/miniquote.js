@@ -23,8 +23,6 @@
  * @copyright   Copyright (c) 2016 Cart2Quote B.V. (http://www.cart2quote.com)
  * @license     http://www.cart2quote.com/ordering-licenses
  */
-// Avoid PrototypeJS conflicts, assign jQuery to $j instead of $
-var $j = jQuery.noConflict();
 function Miniqquote(options) {
     this.formKey = options.formKey;
     this.previousVal = null;
